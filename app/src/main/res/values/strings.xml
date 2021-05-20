@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Energen Anytime </string>
+    <string name="content">
+        <ul>
+             <li>Ensure that the company seal and safety cap is fixed securely on your gas cylinder.</li>\n\n
+            <li>Your LPG cylinder should be fixed at ground level on a plain surface.</li>\n\n
+            <li>Never use lit match-sticks or candles to look for leakages.</li>\n\n
+            <li>Turn the regulator knob to OFF position once you are done using it.</li>\n\n
+            <li>Do not place the cylinder inside an enclosed compartment.</li>\n\n
+            <li>Never leave vessels unattended on burners in operation. The contents may overflow, extinguish the flame and cause leakage.</li>\n\n
+            <li>Self repair is unsafe.</li>
+        </ul>
+    </string>
+</resources>
