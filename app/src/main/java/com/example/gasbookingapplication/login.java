@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,6 +28,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class login extends AppCompatActivity {
     ImageView imageView;
@@ -34,6 +41,9 @@ public class login extends AppCompatActivity {
     TextInputLayout email,password;
     private FirebaseAuth mAuth;
     Button signup,signin,fp;
+    private FirebaseUser user;
+    private DatabaseReference reference;
+    private String userID;
 
 
     @Override
@@ -48,6 +58,9 @@ getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.La
         email=(TextInputLayout)findViewById(R.id.emailid);
         password=(TextInputLayout)findViewById(R.id.password);
         mAuth = FirebaseAuth.getInstance();
+
+
+
 
         fp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,8 +137,37 @@ getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.La
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Intent intent2= new Intent(login.this,Dashboard.class);
-                            startActivity(intent2);
+                            user= FirebaseAuth.getInstance().getCurrentUser();
+                            reference= FirebaseDatabase.getInstance().getReference("Users");
+                            userID=user.getUid();
+                            reference.child(userID).child("f").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+
+
+                                    boolean e= ((boolean) task.getResult().getValue());
+                                    //Toast.makeText(getApplicationContext(),""+e,Toast.LENGTH_SHORT).show();
+
+
+                                    if(e==true)
+                                    {
+                                        Toast.makeText(getApplicationContext(),"Logged in as Admin",Toast.LENGTH_SHORT).show();
+                                        Intent intent3= new Intent(login.this,Admin.class);
+                                        startActivity(intent3);
+
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(getApplicationContext(),"Logged in as User",Toast.LENGTH_SHORT).show();
+                                        Intent intent2= new Intent(login.this,Dashboard.class);
+                                        startActivity(intent2);
+                                    }
+
+                                }
+                            });
+
+//                           Intent intent2= new Intent(login.this,Dashboard.class);
+//                            startActivity(intent2);
                         }
                         else
                         {

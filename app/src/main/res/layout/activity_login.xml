@@ -22,7 +22,7 @@
         android:fontFamily="@font/bungee_inline"
         android:text="Welcome to Energen Anytime"
         android:textColor="@color/black"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/slogan"

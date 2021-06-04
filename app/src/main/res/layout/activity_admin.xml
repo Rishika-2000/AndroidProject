@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:padding="20dp">
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/gascylinder_removebg_preview" />
+
+    <TextView
+        android:id="@+id/logo_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bungee_inline"
+        android:text="Update Refill Prices"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:transitionName="logo_text"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/slogan_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Commercial Refill:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:transitionName="logo_desc"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/commercial"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Commercial Refill price"
+            android:textColorHint="#E64C4141"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
+            android:transitionName="username_tran">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/slogan_name2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Domestic Refill:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:transitionName="logo_desc"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/domestic"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Domestic Refill price"
+            android:textColorHint="#E64C4141"
+            app:boxStrokeColor="@color/black"
+            app:hintTextColor="@color/black"
+            android:transitionName="username_tran">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/black" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/black"
+            android:text="UPDATE"
+            android:textColor="#fff"
+            android:transitionName="button_tran"/>
+        <Button
+            android:id="@+id/admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/black"
+            android:text="Add Admin"
+            android:textColor="#fff"
+            android:transitionName="button_tran"/>
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/black"
+            android:text="LOGOUT"
+            android:textColor="#fff"
+            android:transitionName="button_tran"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

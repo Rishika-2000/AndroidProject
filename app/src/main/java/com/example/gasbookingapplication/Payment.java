@@ -62,7 +62,9 @@ public class Payment extends AppCompatActivity {
         upiIdEt = findViewById(R.id.upi);
         Intent intent=getIntent();
        int Num=intent.getIntExtra("num",0);
-       amountEt.getEditText().setText(Integer.toString(Num*692));
+       float price=intent.getFloatExtra("Price",0);
+       float total=Num*price;
+       amountEt.getEditText().setText(Float.toString(total));
 
 
         send.setOnClickListener(new View.OnClickListener() {
@@ -144,87 +146,6 @@ public class Payment extends AppCompatActivity {
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case UPI_PAYMENT:
-                if ((RESULT_OK == resultCode) || (resultCode == 11)) {
-                    if (data != null) {
-                        String trxt = data.getStringExtra("response");
-                        Log.d("UPI", "onActivityResult: " + trxt);
-                        ArrayList<String> dataList = new ArrayList<>();
-                        dataList.add(trxt);
-                        upiPaymentDataOperation(dataList);
-                    } else {
-                        Log.d("UPI", "onActivityResult: " + "Return data is null");
-                        ArrayList<String> dataList = new ArrayList<>();
-                        dataList.add("nothing");
-                        upiPaymentDataOperation(dataList);
-                    }
-                } else {
-                    Log.d("UPI", "onActivityResult: " + "Return data is null"); //when user simply back without payment
-                    ArrayList<String> dataList = new ArrayList<>();
-                    dataList.add("nothing");
-                    upiPaymentDataOperation(dataList);
-                }
-                break;
-        }
-    }
-
-    private void upiPaymentDataOperation(ArrayList<String> data) {
-        if (isConnectionAvailable(Payment.this)) {
-            String str = data.get(0);
-            Log.d("UPIPAY", "upiPaymentDataOperation: "+str);
-            String paymentCancel = "";
-            if(str == null) str = "discard";
-            String status = "";
-            String approvalRefNo = "";
-            String response[] = str.split("&");
-            for (int i = 0; i < response.length; i++) {
-                String equalStr[] = response[i].split("=");
-                if(equalStr.length >= 2) {
-                    if (equalStr[0].toLowerCase().equals("Status".toLowerCase())) {
-                        status = equalStr[1].toLowerCase();
-                    }
-                    else if (equalStr[0].toLowerCase().equals("ApprovalRefNo".toLowerCase()) || equalStr[0].toLowerCase().equals("txnRef".toLowerCase())) {
-                        approvalRefNo = equalStr[1];
-                    }
-                }
-                else {
-                    paymentCancel = "Order placed successfully";
-                }
-            }
-
-            if (status.equals("success")) {
-                //Code to handle successful transaction here.
-                Toast.makeText(Payment.this, "Transaction successful.", Toast.LENGTH_SHORT).show();
-                Log.d("UPI", "responseStr: "+approvalRefNo);
-            }
-            else if("Payment cancelled by user.".equals(paymentCancel)) {
-                Toast.makeText(Payment.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Toast.makeText(Payment.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(Payment.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    public static boolean isConnectionAvailable(Payment context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager != null) {
-            NetworkInfo netInfo = connectivityManager.getActiveNetworkInfo();
-            if (netInfo != null && netInfo.isConnected()
-                    && netInfo.isConnectedOrConnecting()
-                    && netInfo.isAvailable()) {
-                return true;
-            }
-        }
-        return false;
-    }
     class MyAsyncClass extends AsyncTask<Void, Void, Void> {
 
         ProgressDialog pDialog;

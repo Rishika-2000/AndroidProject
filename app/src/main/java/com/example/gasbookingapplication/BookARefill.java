@@ -7,23 +7,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.internal.GenericIdpActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.EventListener;
+
 public class BookARefill extends AppCompatActivity {
     private FirebaseUser user;
-    private DatabaseReference reference;
+    private DatabaseReference reference,priceref;
     private String userID;
     TextInputLayout FullName,Address,Phno,Number;
     Button pay;
+    RadioGroup Use;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +45,49 @@ public class BookARefill extends AppCompatActivity {
         Phno=(TextInputLayout) findViewById(R.id.phno);
         Number=(TextInputLayout)findViewById(R.id.number);
         pay=(Button)findViewById(R.id.pay);
+        Use=(RadioGroup)findViewById(R.id.use);
+        priceref= FirebaseDatabase.getInstance().getReference("Price");
 
         pay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               String number=Number.getEditText().getText().toString().trim();
-                int Num=Integer.parseInt(number);
-                Intent intent= new Intent(BookARefill.this,Payment.class);
-                intent.putExtra("num",Num);
-                startActivity(intent);
+
+                priceref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        float com,dom,cost;
+                        String ustr = ((RadioButton) findViewById(Use.getCheckedRadioButtonId())).getText().toString();
+                        Price price=snapshot.getValue(Price.class);
+                        com=price.commercial;
+                        dom=price.domestic;
+                        if(ustr.equals("Commercial Use"))
+                        {
+                            cost=com;
+                            //Toast.makeText(getApplicationContext(),""+cost,Toast.LENGTH_SHORT).show();
+
+                        }
+                        else
+                        {
+                            cost=dom;
+                        }
+
+                        String number=Number.getEditText().getText().toString().trim();
+                        int Num=Integer.parseInt(number);
+                        Intent intent= new Intent(BookARefill.this,Payment.class);
+                        intent.putExtra("num",Num);
+                        intent.putExtra("Price",cost);
+                        startActivity(intent);
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
             }
         });
 

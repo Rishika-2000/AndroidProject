@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BookARefill"
+    tools:context=".AdminRegister"
     android:orientation="vertical"
     android:background="@color/white"
     android:padding="20dp">
@@ -15,42 +15,27 @@
         android:src="@drawable/gascylinder_removebg_preview" />
 
     <TextView
+        android:id="@+id/logo_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bungee_inline"
+        android:text="Welcome,"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_marginTop="-20dp"/>
+    <TextView
         android:id="@+id/slogan"
         android:layout_width="wrap_content"
-        android:layout_height="65dp"
-        android:layout_below="@id/logo_img"
-
-
-        android:layout_marginTop="10dp"
-
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
-        android:text="Order details"
-        android:textSize="36sp" />
-  <LinearLayout
+        android:text="Register as an Admin"
+        android:textSize="18sp"/>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:layout_below="@id/logo_img"
-        android:layout_centerVertical="true"
-
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:id="@+id/number"
-            android:hint="Enter no of cylinders"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                >
-
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,28 +51,46 @@
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
+
+
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="5dp"
             android:id="@+id/Address"
-            android:hint="Address"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:inputType="text"
-                >
-
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
+            android:hint="Residential Address">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Aadhar"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:hint="Aadhaar Number">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text">
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/phno"
-            android:hint="Phone Number"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone Number">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -99,9 +102,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:id="@+id/drop"
-            android:hint="Drop at Neighbour address(optional)"
+            android:id="@+id/emailid"
+            android:hint="Email Id"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -111,36 +113,40 @@
 
             </com.google.android.material.textfield.TextInputEditText>
         </com.google.android.material.textfield.TextInputLayout>
-        <RadioGroup
-            android:id="@+id/use"
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <RadioButton
-                android:id="@+id/commercial"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="Commercial Use"/>
-        <RadioButton
-            android:id="@+id/domestic"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Domestic Use"/>
-        </RadioGroup>
+            android:layout_marginBottom="5dp"
+            android:id="@+id/password"
+            android:hint="Password"
+            app:passwordToggleEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                >
+
+            </com.google.android.material.textfield.TextInputEditText>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <Button
-            android:id="@+id/pay"
+            android:id="@+id/signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
             android:layout_marginBottom="5dp"
             android:background="@color/black"
-            android:elevation="0dp"
-            android:text="PROCEED TO PAY"
+            android:text="Sign Up"
             android:textColor="@color/white"
-            android:textSize="14dp"
-            app:backgroundTint="#000000"></Button>
+            app:backgroundTint="#020101">
+
+        </Button>
     </LinearLayout>
 
 
-</LinearLayout>
+    </LinearLayout>
